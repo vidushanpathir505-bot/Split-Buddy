@@ -8,5 +8,5 @@ class Group:
         self.members.append(user)
         
     def add_expense(self, expense):
-        self.expenses.append(self.expense)
+        self.expenses.append(expense)
         

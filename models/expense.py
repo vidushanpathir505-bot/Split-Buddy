@@ -1,4 +1,5 @@
 class Expense:
+    
     def __init__(self, payer, amount, description, participants):
         self.payer = payer
         self.amount = amount

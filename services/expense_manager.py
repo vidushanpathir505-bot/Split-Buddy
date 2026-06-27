@@ -1,15 +1,22 @@
 from models.expense import Expense
 from models.group import Group
-from storage.json_handler import JsonHandler
+
 
 class ExpenseManager:
     
     def __init__(self):
-        self.json_handler = JsonHandler()
+        pass
     
-    def show_expences(self, group):
+    def show_expenses(self, group):
         
-        for expense in group.expences:
-            print(f"{expense.payer} paid Rs.{expense.amount}")
+        for expense in group.expenses:
+            print(f"{expense.payer.name} paid Rs.{expense.amount} for {expense.description}")
             
-    
+    def remove_expense(self, group, expense):
+        
+        if expense in group.expenses:
+            group.expenses.remove(expense)
+            print("Delete Successful")
+        
+        else:
+            print("Expense is not Found")
