@@ -1,8 +1,7 @@
+from models.settlement import Settlement
+
 class ExpenseManager:
-    
-    def __init__(self):
-        pass
-    
+
     def show_expenses(self, group):
         
         if not group.expenses:
@@ -83,6 +82,22 @@ class ExpenseManager:
                 print(f"{expense.description} | Rs.{expense.amount}")
         
         print(f"Total Expenses | {total}")
+        
+    def settle_payment(self, group, payer, receiver, amount):
+        
+        if amount <= 0:
+            print("Invalid Amount")
+            return
+        
+        settlement = Settlement(payer, receiver, amount)
+        
+        group.settlements.append(settlement)
+        
+        print("Payment settled successfully")
+        
+        
+        
+        
         
         
     

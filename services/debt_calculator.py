@@ -1,21 +1,40 @@
 from models.group import Group
-import math
 from collections import defaultdict
 
 class DebtCalculator:
     
     def calculate_debts(self, group):
         
-        balance = defaultdict(float)
+        balances = defaultdict(float)
         
         for expense in group.expenses:
             
-            balance[expense.payer.name] += expense.amount
+            balances[expense.payer.name] += expense.amount
             
             split_amount = expense.amount / len(expense.participants)
     
-            for person in expense.participants:
+            for participant in expense.participants:
                 
-                balance[person.name] -= split_amount
+                balances[participant.name] -= split_amount
                 
-        return balance
+        for settlement in group.settlements:
+            
+            balances[settlement.payer.name] += settlement.amount
+            
+            balances[settlement.receiver.name] -= settlement.amount
+                
+        return balances
+    
+    def show_balances(self, balances):
+        
+        print("\n===== Current Balances =====")
+        
+        for name, amount in balances.items():
+            
+            if amount > 0:
+                print(f"{name} should receive Rs.{amount:.2f}")
+            
+            elif amount < 0:
+                print(f"{name} owes Rs.{abs(amount):.2f}")
+            else:
+                print(f"{name} is settled")
