@@ -3,9 +3,10 @@ from models.group import Group
 from models.expense import Expense
 
 from services.expense_manager import ExpenseManager
-#from services.debt_calculator import DebtCalculator
+from services.debt_calculator import DebtCalculator
 
 exp = ExpenseManager()
+debt = DebtCalculator()
 
 kasun = User("Kasun")
 amara = User("Amara")
@@ -41,3 +42,5 @@ exp.show_expenses(bodima)
 print(exp.total_expense(bodima))
 
 exp.show_user_expense(amara, bodima)
+
+print(debt.calculate_debts(bodima))
