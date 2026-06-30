@@ -1,6 +1,6 @@
 import json
 
-class JaonHandler:
+class JsonHandler:
     
     def save_group(self, group):
         
@@ -11,21 +11,33 @@ class JaonHandler:
             
             "expenses":[
                 {
-                    "payer":expense.payer,
+                    "payer":expense.payer.name,
                     "amount":expense.amount,
-                    "description":expense.discription,
-                    "participants":expense.participants
+                    "description":expense.description,
+                    "participants":[participant.name for participant in expense.participants]
                 }
                 for expense in group.expenses
+            ],
+            
+            "settlements":[
+                {
+                    "payer": settlement.payer.name,
+                    
+                    "receiver":settlement.receiver.name,
+                    
+                    "amount": settlement.amount
+                }
+                
+                for settlement in group.settlements
             ]
         }
         
-        with open("data\data.json", "w") as file:
+        with open("data\\data.json", "w") as file:
             json.dump(data,file,indent=4)
             
     def load_group(self):
         
-        with open("data\data.json", "r") as file:
+        with open("data\\data.json", "r") as file:
             data = json.load(file)
             
         return data
