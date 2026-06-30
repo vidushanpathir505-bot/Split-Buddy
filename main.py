@@ -20,8 +20,7 @@ def display_menu():
     print("8. Settle Payment")
     print("9. Remove Expense")
     print("10. Remove Member")
-    print("11. Save Data")
-    print("12. Exit")
+    print("11. Exit")
     print("================================\n")
 
 
@@ -32,9 +31,12 @@ def main():
     debt_calculator = DebtCalculator()
     json_handler = JsonHandler()
     
+    group, users = json_handler.load_group()
     
-    group = None
-    users = {} 
+    if group:
+        print(f"Loaded previous group: {group.group_name}")
+    else:
+        print("No previous data found.")
     
     print("Welcome to SPLIT-BUDDY!")
     
@@ -222,16 +224,11 @@ def main():
                 print("Member not found!")
         
         elif choice == "11":
-            # Save data
-            if not group:
-                print("No group to save!")
-                continue
-            
-            json_handler.save_group(group)
-            print("Data saved successfully!")
-        
-        elif choice == "12":
             # Exit
+            if group:
+                json_handler.save_group(group)
+             
+            print("\nData saved.")   
             print("\nThank you for using SPLIT-BUDDY!")
             print("Goodbye!\n")
             break

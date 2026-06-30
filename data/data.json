@@ -1,0 +1,27 @@
+{
+    "group_name": "Bodima",
+    "members": [
+        "Vidushan",
+        "Oshada",
+        "Pasindu"
+    ],
+    "expenses": [
+        {
+            "payer": "Pasindu",
+            "amount": 1200.0,
+            "description": "Dinner",
+            "participants": [
+                "Vidushan",
+                "Oshada",
+                "Pasindu"
+            ]
+        }
+    ],
+    "settlements": [
+        {
+            "payer": "Vidushan",
+            "receiver": "Pasindu",
+            "amount": 300.0
+        }
+    ]
+}
